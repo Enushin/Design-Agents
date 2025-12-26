@@ -1,0 +1,88 @@
+.main {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #0066cc 0%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: var(--secondary);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inputSection,
+.previewSection {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+}
+
+.generateButton {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary);
+  border: none;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.generateButton:hover:not(:disabled) {
+  background: #0052a3;
+  transform: translateY(-1px);
+}
+
+.generateButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc2626;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fef2f2;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
