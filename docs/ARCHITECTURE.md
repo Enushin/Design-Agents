@@ -1,4 +1,5 @@
 # Architecture Design Document
+
 ## Deep Design Philosophy Orchestra (DDPO) v3.0.0
 
 ---
@@ -38,17 +39,17 @@
 
 ## 2. Technology Stack
 
-| Layer | Technology | Rationale |
-|-------|------------|-----------|
-| **Frontend** | Next.js 14 (App Router) | SSR、API Routes、React Server Components |
-| **API** | Hono | 軽量、Edge対応、TypeScript |
-| **Agent Framework** | LangChain / Claude SDK | マルチエージェント管理 |
-| **LLM** | Claude 3.5 Sonnet | 高品質な推論、長コンテキスト |
-| **Image Gen** | DALL-E 3 / Stable Diffusion | 画像生成 |
-| **Database** | PostgreSQL + Prisma | 構造化データ |
-| **Cache** | Redis | セッション、中間状態 |
-| **Storage** | Cloudflare R2 | 画像アセット |
-| **Deploy** | Cloudflare Workers | Edge配信 |
+| Layer               | Technology                  | Rationale                                |
+| ------------------- | --------------------------- | ---------------------------------------- |
+| **Frontend**        | Next.js 14 (App Router)     | SSR、API Routes、React Server Components |
+| **API**             | Hono                        | 軽量、Edge対応、TypeScript               |
+| **Agent Framework** | LangChain / Claude SDK      | マルチエージェント管理                   |
+| **LLM**             | Claude 3.5 Sonnet           | 高品質な推論、長コンテキスト             |
+| **Image Gen**       | DALL-E 3 / Stable Diffusion | 画像生成                                 |
+| **Database**        | PostgreSQL + Prisma         | 構造化データ                             |
+| **Cache**           | Redis                       | セッション、中間状態                     |
+| **Storage**         | Cloudflare R2               | 画像アセット                             |
+| **Deploy**          | Cloudflare Workers          | Edge配信                                 |
 
 ---
 
@@ -75,11 +76,12 @@ interface OrchestratorAgent {
 ```
 
 #### Goal Seeking Logic
+
 ```yaml
 input: "20代女性向けのオーガニックコスメのLPを作りたい。清潔感があって、信頼できる感じで。"
 
 analysis:
-  goal: "conversion"  # 購入がゴール
+  goal: "conversion" # 購入がゴール
   target:
     age: "20s"
     gender: "female"
@@ -103,6 +105,7 @@ analysis:
 ```
 
 #### Content Locking Protocol
+
 ```html
 <!-- Locked HTML Structure -->
 <article data-locked="true" data-version="1.0">
@@ -117,9 +120,7 @@ analysis:
 
   <section data-element="cta" data-protected="true">
     <!-- Z-index強制、背景色保証 -->
-    <button data-element="purchase-button">
-      購入する
-    </button>
+    <button data-element="purchase-button">購入する</button>
   </section>
 </article>
 ```
@@ -176,90 +177,84 @@ interface DesignTokens {
 ### 3.3 Agent Implementations (Examples)
 
 #### Agent 01: 佐藤可士和
+
 ```typescript
 // src/agents/designers/kashiwa-sato.ts
 
 export const KashiwaSatoAgent: DesignerAgent = {
-  id: 'agent_01',
-  name: '佐藤可士和',
-  category: 'Iconic Branding',
+  id: "agent_01",
+  name: "佐藤可士和",
+  category: "Iconic Branding",
 
   philosophy: {
-    core: '対象を整理・分類し、最も強い「アイコン」に変換する',
-    principles: [
-      '0.1秒で識別できるか',
-      '情緒や物語を排除',
-      '記号としての強度'
-    ]
+    core: "対象を整理・分類し、最も強い「アイコン」に変換する",
+    principles: ["0.1秒で識別できるか", "情緒や物語を排除", "記号としての強度"],
   },
 
   designTokens: {
     typography: {
-      primary: { family: 'Helvetica Neue', weight: 900 },
-      scale: [14, 18, 24, 36, 48, 72, 96]
+      primary: { family: "Helvetica Neue", weight: 900 },
+      scale: [14, 18, 24, 36, 48, 72, 96],
     },
     colors: {
-      primary: '#FF0000',    // Pure Red
-      secondary: '#0000FF',  // Pure Blue
-      accent: '#FFFF00',     // Pure Yellow
-      background: '#FFFFFF',
-      text: '#000000'
+      primary: "#FF0000", // Pure Red
+      secondary: "#0000FF", // Pure Blue
+      accent: "#FFFF00", // Pure Yellow
+      background: "#FFFFFF",
+      text: "#000000",
     },
     layout: {
       grid: { columns: 12, gutter: 24 },
-      whitespaceRatio: 0.3
-    }
+      whitespaceRatio: 0.3,
+    },
   },
 
   executionRules: [
-    'フォントは太いゴシック体（Sans-serif Bold）を使用',
-    '配色は原色（赤・青・黄）または白黒のハイコントラスト',
-    'レイアウトはグリッドに沿った明確なボックス構成'
-  ]
+    "フォントは太いゴシック体（Sans-serif Bold）を使用",
+    "配色は原色（赤・青・黄）または白黒のハイコントラスト",
+    "レイアウトはグリッドに沿った明確なボックス構成",
+  ],
 };
 ```
 
 #### Agent 02: 原研哉
+
 ```typescript
 // src/agents/designers/kenya-hara.ts
 
 export const KenyaHaraAgent: DesignerAgent = {
-  id: 'agent_02',
-  name: '原研哉',
-  category: 'Emptiness (Ku)',
+  id: "agent_02",
+  name: "原研哉",
+  category: "Emptiness (Ku)",
 
   philosophy: {
-    core: '「白」を情報の器（Emptiness）として扱う',
-    principles: [
-      '圧倒的な余白',
-      '触覚の喚起',
-      '存在感の際立ち'
-    ]
+    core: "「白」を情報の器（Emptiness）として扱う",
+    principles: ["圧倒的な余白", "触覚の喚起", "存在感の際立ち"],
   },
 
   designTokens: {
     typography: {
-      primary: { family: 'Hiragino Mincho', weight: 300 },
-      scale: [10, 12, 14, 16, 20, 24]  // 小さめのスケール
+      primary: { family: "Hiragino Mincho", weight: 300 },
+      scale: [10, 12, 14, 16, 20, 24], // 小さめのスケール
     },
     colors: {
-      primary: '#FAFAFA',
-      secondary: '#F5F5F5',
-      accent: '#E0E0E0',
-      background: '#FFFFFF',
-      text: '#333333'
+      primary: "#FAFAFA",
+      secondary: "#F5F5F5",
+      accent: "#E0E0E0",
+      background: "#FFFFFF",
+      text: "#333333",
     },
     layout: {
-      whitespaceRatio: 0.7,  // 70%余白
-      grid: { columns: 6, gutter: 48 }
-    }
+      whitespaceRatio: 0.7, // 70%余白
+      grid: { columns: 6, gutter: 48 },
+    },
   },
 
   executionRules: [
-    '画面の70%以上を余白（White space）とする',
-    '繊細な明朝体（Serif）を使用',
-    '画像にはテクスチャ感（紙、布、水）を含ませる'
-  ]
+    "画面の70%以上を余白（White space）とする",
+    "繊細な明朝体（Serif）を使用",
+    "画像にはテクスチャ感（紙、布、水）を含ませる",
+  ],
 };
 ```
 
@@ -286,14 +281,14 @@ interface QAValidator {
 
 interface QAResult {
   passed: boolean;
-  score: number;  // 0-100
+  score: number; // 0-100
   issues: QAIssue[];
   autoFixes: AutoFix[];
 }
 
 // Auto-fix for destructive designers
 interface AutoFix {
-  type: 'add_background' | 'increase_contrast' | 'force_zindex';
+  type: "add_background" | "increase_contrast" | "force_zindex";
   target: string;
   css: string;
 }
@@ -414,12 +409,12 @@ ddpo/
 
 ## 6. Security Considerations
 
-| Concern | Mitigation |
-|---------|------------|
-| API Key露出 | 環境変数 + Secret Manager |
+| Concern          | Mitigation                        |
+| ---------------- | --------------------------------- |
+| API Key露出      | 環境変数 + Secret Manager         |
 | Prompt Injection | 入力サニタイズ + 構造化プロンプト |
-| 過剰リクエスト | Rate Limiting (100 req/min) |
-| 生成コンテンツ | Content Moderation API |
+| 過剰リクエスト   | Rate Limiting (100 req/min)       |
+| 生成コンテンツ   | Content Moderation API            |
 
 ---
 

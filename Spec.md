@@ -1,20 +1,20 @@
 app_system:
-  name: "Deep Design Philosophy Orchestra (DDPO) - Complete Edition"
-  version: "3.0.0"
-  description: "ユーザーの曖昧な意図を確定的な仕様に変換し、20名の巨匠デザイナーの哲学で視覚化する厳格なマルチエージェントシステム"
+name: "Deep Design Philosophy Orchestra (DDPO) - Complete Edition"
+version: "3.0.0"
+description: "ユーザーの曖昧な意図を確定的な仕様に変換し、20名の巨匠デザイナーの哲学で視覚化する厳格なマルチエージェントシステム"
 
-  # ==================================================================================
-  # 1. ユーザーインターフェース (Input Layer)
-  # ==================================================================================
-  ui_component:
-    input_area:
-      label: "Project Request"
-      placeholder: "例：20代女性向けのオーガニックコスメのLPを作りたい。清潔感があって、信頼できる感じで。"
-      required_fields:
-        - content_text: "作成したい内容・テキスト情報"
-        - target_audience: "ターゲット層"
-        - media_type: "媒体（Web LP, Poster, Logo, Package, UI Design）"
-    
+# ==================================================================================
+
+# 1. ユーザーインターフェース (Input Layer)
+
+# ==================================================================================
+
+ui_component:
+input_area:
+label: "Project Request"
+placeholder: "例：20代女性向けのオーガニックコスメのLPを作りたい。清潔感があって、信頼できる感じで。"
+required_fields: - content_text: "作成したい内容・テキスト情報" - target_audience: "ターゲット層" - media_type: "媒体（Web LP, Poster, Logo, Package, UI Design）"
+
     agent_selector:
       type: "card_selection"
       label: "Select Art Director"
@@ -23,13 +23,17 @@ app_system:
         # User selects one from the list of 20 agents defined below
         source: "agents.sub_agents_list"
 
-  # ==================================================================================
-  # 2. オーケストラエージェント (The Director & Guardian)
-  #    役割：要件定義、仕様確定、コンテンツ保護。デザインはしない。
-  # ==================================================================================
-  orchestrator:
-    role: "Project Manager / Requirement Guardian"
-    
+# ==================================================================================
+
+# 2. オーケストラエージェント (The Director & Guardian)
+
+# 役割：要件定義、仕様確定、コンテンツ保護。デザインはしない。
+
+# ==================================================================================
+
+orchestrator:
+role: "Project Manager / Requirement Guardian"
+
     # ユーザーの意図を深掘りし、確定させる思考プロセス
     goal_seeking_logic:
       instruction: >
@@ -48,18 +52,21 @@ app_system:
         1. テキストの内容（Copywriting）はオーケストラ側で確定する。デザイナーに変更させてはならない。
         2. 必須機能（ボタン、ナビゲーション）のDOM構造は固定する。
         3. デザイナーへの依頼は「CSS」「装飾用画像生成」「レイアウト調整」のみに限定する。
-        
+
         もしデヴィッド・カーソンのような「破壊的デザイナー」が選ばれたとしても、
         「購入ボタン」が読めなくなることは許されない。その場合はZ-indexを強制的に最前面にするラッパーを用意せよ。
 
-  # ==================================================================================
-  # 3. サブエージェント群 (The Designers)
-  #    役割：確定されたコンテンツに対し、独自の視覚哲学を適用する
-  # ==================================================================================
-  agents:
-    list:
-      # --- Group A: Japanese Aesthetics & Structure ---
-      
+# ==================================================================================
+
+# 3. サブエージェント群 (The Designers)
+
+# 役割：確定されたコンテンツに対し、独自の視覚哲学を適用する
+
+# ==================================================================================
+
+agents:
+list: # --- Group A: Japanese Aesthetics & Structure ---
+
       - id: "agent_01"
         name: "佐藤可士和 (Kashiwa Sato)"
         category: "Iconic Branding"
@@ -305,18 +312,18 @@ app_system:
           - "雑誌的なエッジの効いたレイアウト"
           - "黒背景やネオンカラーなどクラブカルチャー的配色"
 
-  # ==================================================================================
-  # 4. 実行ワークフロー (Workflow Pipeline)
-  # ==================================================================================
-  workflow:
-    phase_1_intent_locking:
-      actor: "Orchestrator"
-      action: "Goal Seeking"
-      process:
-        - "ユーザー入力: 'コーヒーのLP作りたい'"
-        - "推論: '目的=販売、ターゲット=一般消費者、必須=商品写真/価格/カート'"
-        - "確定: コンテンツ仕様書（HTML構造）の生成"
-      output: "Specification_Locked.json"
+# ==================================================================================
+
+# 4. 実行ワークフロー (Workflow Pipeline)
+
+# ==================================================================================
+
+workflow:
+phase_1_intent_locking:
+actor: "Orchestrator"
+action: "Goal Seeking"
+process: - "ユーザー入力: 'コーヒーのLP作りたい'" - "推論: '目的=販売、ターゲット=一般消費者、必須=商品写真/価格/カート'" - "確定: コンテンツ仕様書（HTML構造）の生成"
+output: "Specification_Locked.json"
 
     phase_2_style_injection:
       actor: "Selected Sub-Agent"
