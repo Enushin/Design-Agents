@@ -184,15 +184,15 @@ export interface ImageAsset {
 }
 
 export interface DesignOutput {
-  id: string;
-  specification_id: string;
-  agent_id: string;
+  id?: string;
+  specification_id?: string;
+  agent_id?: string;
   html: string;
   css: string;
-  images: ImageAsset[];
-  qa_passed: boolean;
+  images: ImageAsset[] | string[];
+  qa_passed?: boolean;
   qa_issues?: QAIssue[];
-  created_at: Date;
+  created_at?: Date;
 }
 
 // =============================================================================
